@@ -1,3 +1,4 @@
+// 动态规划
 function maxProductAfterCutting_solution1(length) {
   if (length < 2) return 0
   if (length === 2) return 1
@@ -20,8 +21,20 @@ function maxProductAfterCutting_solution1(length) {
   return products[length]
 }
 
-function maxProductAfterCutting_solution2() {
-  return true
+// 贪婪算法
+function maxProductAfterCutting_solution2(length) {
+  if (length < 2) return 0
+  if (length === 2) return 1
+  if (length === 3) return 2
+
+  let timesOf3 = Math.floor(length / 3)
+  if ((length - timesOf3 * 3) === 1) {
+    timesOf3 -= 1
+  }
+
+  const ti2 = (length - timesOf3 * 3) / 2
+
+  return Math.pow(3, timesOf3) * Math.pow(2, ti2)
 }
 
 function test(testName, length, expected) {
@@ -31,11 +44,11 @@ function test(testName, length, expected) {
   else
       console.log("Solution1 for ", testName, " FAILED.")
 
-  // const result2 = maxProductAfterCutting_solution2(length);
-  // if(result2 == expected)
-  //     console.log("Solution2 for ", testName, " passed.")
-  // else
-  //     console.log("Solution2 for ", testName, " FAILED.")
+  const result2 = maxProductAfterCutting_solution2(length);
+  if(result2 == expected)
+      console.log("Solution2 for ", testName, " passed.")
+  else
+      console.log("Solution2 for ", testName, " FAILED.")
 }
 
 function test1() {
