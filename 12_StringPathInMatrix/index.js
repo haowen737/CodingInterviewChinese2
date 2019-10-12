@@ -1,6 +1,42 @@
 function hasPath(matrix, rows, cols, str) {
-  
+
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      let visited = new Set()
+      let pathLength = 0
+      if (
+        hasPathCore(matrix, rows, cols, row, col, str, pathLength, visited)
+      ) {
+        return true
+      }
+    }
+  }
+  return false
 }
+
+function hasPathCore(matrix, rows, cols, row, col, str, pathLength, visited) {
+
+  // console.log(pathLength, str[pathLength], matrix[row * rows + col], row, col)
+
+  let hasPath = false
+  const key = `${row},${col}`
+  if (str.length === pathLength) return true
+  if (
+    row >= 0 && row < rows && 
+    col >= 0 && col < cols &&
+    str[pathLength] === matrix[row * cols + col] && !visited.has(key)
+  ) {
+    pathLength++
+    visited.add(key)
+    hasPath = hasPathCore(matrix, rows, cols, row, col - 1, str, pathLength, visited) ||
+      hasPathCore(matrix, rows, cols, row, col + 1, str, pathLength, visited) ||
+      hasPathCore(matrix, rows, cols, row - 1, col, str, pathLength, visited) ||
+      hasPathCore(matrix, rows, cols, row + 1, col, str, pathLength, visited)
+  }
+
+  return hasPath
+}
+
 
 //ABTG
 //CFCS
@@ -116,4 +152,4 @@ const str11 = "B";
 
 console.log(hasPath(matrix11, 1, 1, str11) === false);
 
-console.log(hasPath(null, nullptr, null) ===alse);
+console.log(hasPath(null, 0, 0, null) === false);
