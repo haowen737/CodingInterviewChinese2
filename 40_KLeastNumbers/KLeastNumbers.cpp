@@ -8,13 +8,13 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 *******************************************************************/
 
 //==================================================================
-// 《剑指Offer——名企面试官精讲典型编程题》代码
-// 作者：何海涛
+// ?????Offer????????????????????????????
+// ??????κ???
 //==================================================================
 
-// 面试题40：最小的k个数
-// 题目：输入n个整数，找出其中最小的k个数。例如输入4、5、1、6、2、7、3、8
-// 这8个数字，则最小的4个数字是1、2、3、4。
+// ??????40????С??k????
+// ?????????n?????????????????С??k??????????????4??5??1??6??2??7??3??8
+// ??8???????????С??4????????1??2??3??4??
 
 #include <cstdio>
 #include "..\Utilities\Array.h"
@@ -26,7 +26,7 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 
 using namespace std;
 
-// ====================方法1====================
+// ====================????1====================
 void GetLeastNumbers_Solution1(int* input, int n, int* output, int k)
 {
     if(input == nullptr || output == nullptr || k > n || n <= 0 || k <= 0)
@@ -53,7 +53,7 @@ void GetLeastNumbers_Solution1(int* input, int n, int* output, int k)
         output[i] = input[i];
 }
 
-// ====================方法2====================
+// ====================????2====================
 typedef multiset<int, std::greater<int> >            intSet;
 typedef multiset<int, std::greater<int> >::iterator  setIterator;
 
@@ -83,7 +83,7 @@ void GetLeastNumbers_Solution2(const vector<int>& data, intSet& leastNumbers, in
     }
 }
 
-// ====================测试代码====================
+// ====================???????====================
 void Test(char* testName, int* data, int n, int* expectedResult, int k)
 {
     if(testName != nullptr)
@@ -124,7 +124,7 @@ void Test(char* testName, int* data, int n, int* expectedResult, int k)
     printf("\n\n");
 }
 
-// k小于数组的长度
+// kС??????????
 void Test1()
 {
     int data[] = {4, 5, 1, 6, 2, 7, 3, 8};
@@ -132,7 +132,7 @@ void Test1()
     Test("Test1", data, sizeof(data) / sizeof(int), expected, sizeof(expected) / sizeof(int));
 }
 
-// k等于数组的长度
+// k????????????
 void Test2()
 {
     int data[] = {4, 5, 1, 6, 2, 7, 3, 8};
@@ -140,7 +140,7 @@ void Test2()
     Test("Test2", data, sizeof(data) / sizeof(int), expected, sizeof(expected) / sizeof(int));
 }
 
-// k大于数组的长度
+// k????????????
 void Test3()
 {
     int data[] = {4, 5, 1, 6, 2, 7, 3, 8};
@@ -148,7 +148,7 @@ void Test3()
     Test("Test3", data, sizeof(data) / sizeof(int), expected, 10);
 }
 
-// k等于1
+// k????1
 void Test4()
 {
     int data[] = {4, 5, 1, 6, 2, 7, 3, 8};
@@ -156,7 +156,7 @@ void Test4()
     Test("Test4", data, sizeof(data) / sizeof(int), expected, sizeof(expected) / sizeof(int));
 }
 
-// k等于0
+// k????0
 void Test5()
 {
     int data[] = {4, 5, 1, 6, 2, 7, 3, 8};
@@ -164,7 +164,7 @@ void Test5()
     Test("Test5", data, sizeof(data) / sizeof(int), expected, 0);
 }
 
-// 数组中有相同的数字
+// ?????????????????
 void Test6()
 {
     int data[] = {4, 5, 1, 6, 2, 7, 2, 8};
@@ -172,7 +172,7 @@ void Test6()
     Test("Test6", data, sizeof(data) / sizeof(int), expected, sizeof(expected) / sizeof(int));
 }
 
-// 输入空指针
+// ????????
 void Test7()
 {
     int* expected = nullptr;
