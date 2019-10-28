@@ -1,10 +1,9 @@
 function digitAtIndex(index) {
   if (!index) return 0
-  const strN = index.toString()
-  const length = strN.length
 
   let digit = 1
   while (true) {
+
     const numbers = countOfIntegers(digit)
 
     if (index < numbers * digit)
@@ -19,9 +18,9 @@ function digitAtIndex(index) {
 
 function digitAtIndex2(index, digit) {
   let number = beginNumber(digit) + index / digit
-  let indexFromRight = digit - Math.floor(index % digit)
+  let indexFromRight = digit - index % digit
 
-  for (let i = 0; i < indexFromRight; i++) number /= 10
+  for (let i = 1; i < indexFromRight; i++) number = number / 10
 
   return Math.floor(number % 10)
 }
@@ -39,10 +38,11 @@ function countOfIntegers(digit) {
 }
 // ====================测试代码====================
 function test(testName, inputIndex, expectedOutput) {
-	if(digitAtIndex(inputIndex) == expectedOutput)
-		console.log(testName, " passed.");
+  const result = digitAtIndex(inputIndex)
+	if(result == expectedOutput)
+		console.log(testName, " passed.", result, expectedOutput);
 	else
-		console.log(testName, " FAILED.");
+		console.log(testName, " FAILED.", result, expectedOutput);
 }
 
 
