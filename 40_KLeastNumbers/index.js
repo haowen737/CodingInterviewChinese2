@@ -1,3 +1,6 @@
+/**
+ * GetLeastNumbers_Solution1 Code passed at leetcode-cn.cn
+ */
 function Partition2(numbers, start, end, k) {
   let index = start
   for (let i = start + 1; i <= end; i++) {
@@ -20,79 +23,41 @@ function swap(numbers, left, right) {
   numbers[left] = dummy
 }
 
+function Partition(numbers, start, end, k) {
+  while(start < end) {
+    let r = end
+    let l = start
+    let s = numbers[l]
+    while(l < r) {
+      while(numbers[r] <= s && l < r) { r-- }
+      numbers[l] = numbers[r]
 
-function Partition(numbers, start, end) {
-  let nPos = start
-  let pivot = numbers[start]
-
-  for (let i = start; i < end; i++) {
-    // console.log('for', i , 'numbers[i]', numbers[i], 'numbers[start]', numbers[start])
-    if (numbers[i] > numbers[end]) {
-        let dummy = numbers[end]
-        numbers[end] = numbers[i]
-        numbers[i] = dummy
-      // console.log('numbers', numbers, pivot, i)
-
-      nPos++
+      while(s < numbers[l] && l < r) { l++ }
+      numbers[r] = numbers[l]
     }
+
+    numbers[l] = s
+    Partition(numbers, start, l - 1)
+    start = l + 1
   }
-  return nPos
 }
-
-function PartitionC(numbers, start, end) {
-  if (!numbers || numbers.length <= 0 || start < 0 || end >= numbers.length) {
-    return null
-  }
-
-  let index = start
-  let nPos = start - 1
-
-  swap(numbers, index, end)
-  console.log('before', numbers)
-  for (index = start; index < end; index++) {
-    console.log('loop', numbers, index, end)
-    if (numbers[index] < numbers[end]) {
-      nPos++
-
-      if (nPos !== index) {
-        swap(numbers, nPos, index)
-      }
-    }
-  }
-  console.log('after', numbers)
-
-  nPos++
-  swap(numbers, nPos, end)
-
-  console.log('return', numbers)
-  return nPos
-
+function QuickSort(numbers, start, end, k) {
+  Partition(numbers, start, end, k)
 }
-
 
 function GetLeastNumbers_Solution1(numbers, k) {
   if (!numbers || !numbers.length || !k) return null
   if (k > numbers.length) return null
 
-  let start = 0
-  let end = numbers.length - 1
-  let middle = numbers.length
-  let pointer = PartitionC(numbers, start, end)
+  QuickSort(numbers, 0, numbers.length - 1)
 
-console.log('num', numbers)
+}
 
-  while(pointer !== k - 1) {
-    if (pointer > k - 1) {
-      end = pointer - 1
-      pointer = PartitionC(numbers, start, end, k)
-    } else {
-      start = pointer + 1
-      pointer = PartitionC(numbers, start, end, k)
-    }
-    // console.log('loop', numbers)
+function GetLeastNumbers_Solution2(numbers, k) {
+  
+  for (let index = 0; index < numbers.length; index++) {
+    const element = numbers[index]
   }
-
-  return numbers.slice(0, k)
 }
 
 // ====================测试代码====================
@@ -121,13 +86,14 @@ function Test(testName, data, n, expectedResult, k) {
 
     delete output;
 
-    // console.log("Result for solution2:\n");
-    // let leastNumbers;
-    // GetLeastNumbers_Solution2(vectorData, leastNumbers, k);
-    // console.log("The actual output numbers are:\n");
+    console.log("Result for solution2:\n");
+    let leastNumbers;
+    const output2 = GetLeastNumbers_Solution2(vectorData, leastNumbers, k);
+    console.log("The actual output numbers are:\n");
+    console.log(output2)
     // for(setIterator iter = leastNumbers.begin(); iter != leastNumbers.end(); ++iter)
-    //     console.log("%d\t", *iter);
-    // console.log("\n\n");
+        // console.log("%d\t", *iter);
+    console.log("\n\n");
 }
 
 // k小于数组的长度
@@ -185,14 +151,19 @@ function Test7()
     Test("Test7", null, 0, expected, 0);
 }
 
+function Test8() {
+  Test('test8', [4,1,-1,2,-1,2,3], 7, [-1,-2], 2)
+}
+
 ;(function main() {
-    Test1(); 
+    // Test1(); 
     // Test2();
     // Test3();
     // Test4();
     // Test5();
     // Test6();
     // Test7();
+    Test8();
 
     return 0;
 })()
